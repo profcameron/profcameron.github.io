@@ -1,24 +1,49 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio of Eric Cameron</title>
     <link rel="stylesheet" href="styles.css">
-  </head>
-  
+</head>
 <body>
-  <h1>Hello and welcome!</h1>
-  <p>You have reached the professional portfolio of Eric Cameron</p>
-  <p>Below you will find some code samples.</p>
-    <table>
-      <tr>
-        <td><h2><a href="Granting Database Permissions.xlsx" target="_top">Database Setup</a></h2>
-          <p>A script I created in Excel to generate my class schemas, grant permissions, and load data files to their schemas.</p>
-          <p>You may ask why I did this in Excel; I found it easier to copy and paste from our database server than to save to a data file.</p>
-        </td>
-        <td><h2><a href="Generate Dataset.py" target="_top">Generating Diverse Datasets</a></h2>
-          <p>A Python script I created to generate random data sets that include diverse names. Textbook databases too often are filled with names like John Smith.</p>
-          <p>There are a few data files that go with this that will prevent this from running but you can see my logic!</p>
-        </td>
-      </tr>
-    </table>
-  </body>
+
+    <div class="container">
+        <header>
+            <h2>Welcome to Eric Cameron's Writing Portfolio</h2>
+        </header>
+        <nav>
+            <a href="code.html">Code Portfolio</a> | 
+            <a href="workshops.html">Technical Workshops Portfolio</a> | 
+            <a href="infographics.html">Infographics Portfolio</a> | 
+            <a href="writing.html">Writing Portfolio</a> | 
+            <a href="https://www.linkedin.com/in/ericcameron">LinkedIn</a>
+        </nav>
+        <main>
+            <article>
+                <h2><a href="https://github.com/profcameron/usernameCheck-openai" target="_top">Username Check (OpenAI)</a></h2>
+                <p>Harnessing the power of OpenAI in a command-line Java program and the Spring framework to connect to OpenAI and check a username for appropriateness.</p>
+                <p>A more in-depth set of notes can be found in the project's README.</p>
+            </article>
+            <article>
+                <h2><a href="https://github.com/profcameron/cloudinary-vue" target="_top">Cloudinary Vue Demo</a></h2>
+                <p>Using Cloudinary's API in a Vue front-end, showing component-based design.</p>
+                <p>A more in-depth set of notes can be found in the project's README.</p>
+            </article>
+            <article>
+                <h2><a href="https://docs.google.com/spreadsheets/d/1rTQg9q_sAF2I3mwRk-KudECXhBkokMrgiqooIJarmjg/edit?usp=sharing" target="_top">Database Setup</a></h2>
+                <p>A script I created in Excel to generate my class MySQL schemas, grant permissions, and load data to their schemas.</p>
+                <p>I've ported it over to Google Sheets. My goal was to paste my roster and have everything generated for me.<br />
+                   This strips the domain from the username, creates an account with the same username (using Windows authentication/single sign on), create a new schema for the user, grant them permissions, and populate it, and give read/execute access to common databases. There are a few other tabs to clean up student accounts at the end of the semester and refresh instructor and tutor accounts.<br />
+                   Basically, it's a great way to use Excel's string manipulation. </p> 
+              </article>
+              <article>
+                <h2><a href="generateDataset.py" target="_top"><h2>Generating Diverse Datasets</h2></a>          
+                <p>A Python script I created to generate random data sets that include diverse names. Textbook databases too often are filled with names like John Smith.</p>
+                <p>There are a few data files that go with this that will prevent this from running but you can see my logic!</p>
+              </article>        
+        </main>
+    </div>
+    
+</body>
 </html>
