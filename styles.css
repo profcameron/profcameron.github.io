@@ -36,6 +36,10 @@ nav{
     justify-content: space-around;
 }
 
+article{
+    border: 1px solid black;
+}
+
 body{
     background-color: #4D565E;
 }
