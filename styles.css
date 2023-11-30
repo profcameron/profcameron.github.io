@@ -20,7 +20,6 @@ header{
 
 main{
     grid-area: main-grid;
-    height: 1fr;
     margin: 5px 5px 0px 5px;
     background-color: #DAE8F2;    
 }
