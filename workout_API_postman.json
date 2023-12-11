@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "6b92deed-83e5-4147-8bdf-587d41d97f32",
+		"name": "Workout API example.com",
+		"description": "A collection of (not real) API requests saved for future developers to download from the example.com API documentation page. Please note all requests will result in a 404 error.\n\nFull set of documentation: [https://github.com/profcameron/profcameron.github.io/blob/main/API_Sample.md](https://github.com/profcameron/profcameron.github.io/blob/main/API_Sample.md)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21728886"
+	},
+	"item": [
+		{
+			"name": "Get All Exercises ( GET /api/v1/exercises )",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.example.com/api/vi/exercises",
+					"protocol": "http",
+					"host": [
+						"www",
+						"example",
+						"com"
+					],
+					"path": [
+						"api",
+						"vi",
+						"exercises"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve a Specific Exercise ( GET /api/v1/exercises/{id} }",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.example.com/api/vi/exercises/{id}",
+					"protocol": "http",
+					"host": [
+						"www",
+						"example",
+						"com"
+					],
+					"path": [
+						"api",
+						"vi",
+						"exercises",
+						"{id}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Retrieve a Specific Exercise (GET /api/v1/exercises/{id} }",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://www.example.com/api/vi/exercises/101",
+							"protocol": "http",
+							"host": [
+								"www",
+								"example",
+								"com"
+							],
+							"path": [
+								"api",
+								"vi",
+								"exercises",
+								"101"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Retrieve Exercises for a Muscle ( GET /api/v1/exercises?muscle=value )",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.example.com/api/vi/exercises?muscle=value",
+					"protocol": "http",
+					"host": [
+						"www",
+						"example",
+						"com"
+					],
+					"path": [
+						"api",
+						"vi",
+						"exercises"
+					],
+					"query": [
+						{
+							"key": "muscle",
+							"value": "value"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Retrieve Exercises for a Bicep Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://www.example.com/api/vi/exercises?muscle=bicep",
+							"protocol": "http",
+							"host": [
+								"www",
+								"example",
+								"com"
+							],
+							"path": [
+								"api",
+								"vi",
+								"exercises"
+							],
+							"query": [
+								{
+									"key": "muscle",
+									"value": "bicep"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
