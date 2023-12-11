@@ -1,6 +1,9 @@
 # Sample API Documentation
 This is a sample API documentation for a fictional workout builder application. Note that all of these requests will return a 404 error for the moment.
 
+## Postman Collection
+You can [import this Postman collection](./workout_API_Postman.json) of the Workout Builder requests. If you have never imported a collection before, view the [Postman Import an API documentation](https://learning.postman.com/docs/designing-and-developing-your-api/importing-an-api/) for assistance (it's short; 5 steps).
+
 ## Base URL
 The following is the base URL for this exercise:
 http://www.example.com/api/v1
