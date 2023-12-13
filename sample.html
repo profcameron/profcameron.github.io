@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example.com Workout Builder API Documentation</title>
+    <style>
+        table, tr, td {
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<p>Note: Originally formatted as <a href="API_Sample.md">Markdown</a>; converted to HTML here so it can be viewed in browser.</p>
+<h1 id="sample-api-documentation">Sample API Documentation</h1>
+<p>This is a sample API documentation for a fictional workout builder application. Note that all of these requests will return a 404 error for the moment.</p>
+<h2 id="postman-collection">Postman Collection</h2>
+<p>You can <a href="./workout_API_Postman.json">import this Postman collection</a> of the Workout Builder requests. If you have never imported a collection before, view the <a href="https://learning.postman.com/docs/designing-and-developing-your-api/importing-an-api/">Postman Import an API documentation</a> for assistance (it&#39;s short; 5 steps).</p>
+<h2 id="base-url">Base URL</h2>
+<p>The following is the base URL for this exercise:
+<a href="http://www.example.com/api/v1">http://www.example.com/api/v1</a></p>
+<h2 id="retrieve-all-exercises">Retrieve All Exercises</h2>
+<p>Returns a list of all exercises available in the workout builder.</p>
+<h3 id="endpoint">Endpoint</h3>
+<p><code>GET /exercises</code></p>
+<h3 id="request-example">Request Example</h3>
+<p><code>curl -X GET &#39;http://www.example.com/api/v1/exercises&#39;</code></p>
+<h3 id="response-example">Response Example</h3>
+<pre><code>[
+   {
+       <span class="hljs-attr">"id"</span>: <span class="hljs-number">101</span>,
+       <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Milagros Hernandez"</span>,
+       <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Bicep Curl"</span>,
+       <span class="hljs-attr">"level"</span>: <span class="hljs-string">"basic"</span>,
+       <span class="hljs-attr">"muscle"</span>: <span class="hljs-string">"bicep"</span>,
+       <span class="hljs-attr">"instructions"</span>: <span class="hljs-string">"Stand with your feet apart, approximately shoulder-width apart, with a dumbbell in each hand. With your palms facing upwards and your elbows close to the body, curl the weights up. Pause at the top and slowly lower the dumbbells."</span>
+   },
+   {
+       <span class="hljs-attr">"id"</span>: <span class="hljs-number">102</span>,
+       <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Corey Miller"</span>,
+       <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Shoulder Shrug"</span>,
+       <span class="hljs-attr">"level"</span>: <span class="hljs-string">"intermediate"</span>,
+       <span class="hljs-attr">"muscle"</span>: <span class="hljs-string">"trapezius"</span>,
+       <span class="hljs-attr">"instructions"</span>: <span class="hljs-string">"Stand with your feet apart, approximately shoulder-width apart, with your arms hanging at your sides. Lift your shoulders towards your ears, holding the position at the peak for a moment. Slowly lower your shoulders to your starting position."</span>
+   },
+]
+</code></pre><h2 id="retrieve-a-specific-exercise">Retrieve a Specific Exercise</h2>
+<p>Returns an exercise, based on the id number.</p>
+<h3 id="endpoint">Endpoint</h3>
+<p><code>GET /exercises/{id}</code></p>
+<h3 id="parameter-information">Parameter Information</h3>
+<table>
+<tr><td>Parameters</td><td>Data Type</td><td>Description</td></tr>
+<tr><td>id</td><td>int</td><td>The unique id number of a specific exercise.</td></tr>
+</table>
+<h3 id="request-example">Request Example</h3>
+<p><code>curl -X GET &#39;http://www.example.com/api/v1/exercises/101&#39;</code></p>
+<h3 id="response-example">Response Example</h3>
+<pre><code>{
+    <span class="hljs-comment">"id"</span>: <span class="hljs-number">101</span>,
+    <span class="hljs-comment">"author"</span>: <span class="hljs-comment">"Milagros Hernandez"</span>,
+    <span class="hljs-comment">"title"</span>: <span class="hljs-comment">"Bicep Curl"</span>,
+    <span class="hljs-comment">"level"</span>: <span class="hljs-comment">"basic"</span>,
+    <span class="hljs-comment">"muscle"</span>: <span class="hljs-comment">"bicep"</span>,
+    <span class="hljs-comment">"instructions"</span>: <span class="hljs-comment">"Stand with your feet apart, approximately shoulder-width apart, with a dumbbell in each hand. With your palms facing upwards and your elbows close to the body, curl the weights up. Pause at the top and slowly lower the dumbbells."</span>
+}
+</code></pre><h2 id="retrieve-exercises-for-a-muscle">Retrieve Exercises for a Muscle</h2>
+<p>Returns a filtered list of exercise, based on the muscle specified.</p>
+<h3 id="endpoint">Endpoint</h3>
+<p><code>GET /exercises?muscle=value</code></p>
+<h3 id="parameter-information">Parameter Information</h3>
+<table>
+<tr><td>Parameters</td><td>Data Type</td><td>Description</td></tr>
+<tr><td>value</td><td>String</td><td>The body part for which you want to search for. Case insensitive.</td></tr>
+</table>
+<h3 id="request-example">Request Example</h3>
+<p><code>curl -X GET &#39;http://www.example.com/api/v1/exercises?muscle=bicep&#39;</code></p>
+<h3 id="response-example">Response Example</h3>
+<pre><code>[
+    {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-number">101</span>,
+        <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Milagros Hernandez"</span>,
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Bicep Curl"</span>,
+        <span class="hljs-attr">"level"</span>: <span class="hljs-string">"basic"</span>,
+        <span class="hljs-attr">"muscle"</span>: <span class="hljs-string">"bicep"</span>,
+        <span class="hljs-attr">"instructions"</span>: <span class="hljs-string">"Stand with your feet apart, approximately shoulder-width apart, with a dumbbell in each hand. With your palms facing upwards and your elbows close to the body, curl the weights up. Pause at the top and slowly lower the dumbbells."</span>
+    },
+    {
+       <span class="hljs-attr">"id"</span>: <span class="hljs-number">103</span>,
+       <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Anjana Sharma"</span>,
+       <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Inclined Bicep Curl"</span>,
+       <span class="hljs-attr">"level"</span>: <span class="hljs-string">"advanced"</span>,
+       <span class="hljs-attr">"muscle"</span>: <span class="hljs-string">"bicep"</span>,
+       <span class="hljs-attr">"instructions"</span>: <span class="hljs-string">"Adjust a bench at a 45 degree angle. With your palms up, resting on the bench, curl the weights. Pause at the top and slowly lower the dumbbells."</span>
+   },
+]
+</code></pre>
+    
+</body>
+</html>
