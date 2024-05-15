@@ -235,7 +235,7 @@ def main():
     mydb = mysql.connector.connect(
       host="cis.pccc.edu",
       user="ecameron",
-      password="1313",
+      password="realpassword",
       database="ecameron"
     )
 
