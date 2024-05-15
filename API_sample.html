@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sample API Documentation | profcameron.github.io</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <style>
         table, tr, td {
           border: 1px solid black;
@@ -17,12 +19,12 @@
         <header>
             <h2>Sample API Documentation/h2>
         </header>
-        <nav>
-            <a href="code.html">Code Portfolio</a> | 
-            <a href="workshops.html">Technical Workshop Portfolio</a> | 
-            <a href="infographics.html">Infographics Portfolio</a> | 
-            <a href="writing.html">Writing Portfolio</a> | 
-            <a href="https://www.linkedin.com/in/ericcameron">LinkedIn</a>
+        <nav id="nav-placeholder">
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
         </nav>
     <main>
         <article>

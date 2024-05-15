@@ -6,22 +6,27 @@
     ". nav-grid ."
     "main-grid main-grid main-grid";
     grid-template-columns: 50px 1fr 50px;
-    background-color: antiquewhite;
     margin: 15px;
+    background: #992600;
+    font-family: "Roboto", sans-serif;    
 }
+
 
 header{
     grid-area: header-grid;
-    height: 75px;
-    margin: 5px 5px 0px 5px;
-    background-color: #DAE8F2;
+    margin: 25px 25px 25px 25px;
+    background-color: #994d00;
     text-align: center;
+    border-radius: 10px;
+    font-size: 28px;
 }
 
 main{
     grid-area: main-grid;
-    margin: 5px 5px 0px 5px;
-    background-color: #DAE8F2;    
+    margin: 25px 25px 25px 25px;
+    background-color: #DAE8F2;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 nav{
@@ -34,6 +39,7 @@ nav{
     align-items: center;
     justify-content: space-around;
     font-size: 1.2em;
+    border-radius: 5px;
 }
 
 article{
@@ -46,6 +52,6 @@ body{
 }
 
 a{
-    color: #AB64EF;
+    color: #000C66;
 }
 
