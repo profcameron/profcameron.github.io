@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Server Functions</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!-- Adding a little spacing and separation between articles-->
+    <style>
+        h3 {
+          border-top: 1px solid black;
+          padding-top: 10px;
+        }        
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>SQL Server Functions</h2>
+        </header>
+        <nav id="nav-placeholder">
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        </nav>
+    <main>
+        <article>
+            <h1>Fun with SQL Server Functions</h1>
+            <p>There is an ANSI standard for the SQL programming language, and then each implementation adds their own features. For example, when I have taught PostgreSQL, I always made sure to point out that the ILIKE operator (a case-insensitive LIKE) is PostgreSQL-specific.</p>
+            <p>Microsoft SQL Server uses an extension of SQL called T-SQL (Transact-SQL). The big things to learn are typically the functions and how to write stored procedures, functions, and triggers.</p>
+            <p>As I've used the same field names as the W3 Schools T-SQL function reference, you can use the W3Schools site to play around with this without installing anything <a href="https://www.w3schools.com/sql/sql_ref_sqlserver.asp" target="_blank">here</a> (pick any function and select "Try It"). You can also download my code that creates and inserts values <a href="prepend.sql">here</a>.</p>
+            <h2>Problem Definition</h2>
+            <p>Customer ID is currently stored as a numeric data type (say, INT). The business team has requested we provide them with the Customer ID in the following format:</p>
+            <p><code>C + the customer's ID number</code></p>
+            <p>However, to be standardized, they'd like all customer IDs to be 6 characters, and fill in any missing spaces with 0, so:</p>
+            <code>CustomerID of 1 -----> C00001</code><br />
+            <code>CustomerID of 22 ----> C00022</code><br />
+            <code>CustomerID of 333 ---> C00333</code><br />
+            <code>CustomerID of 4444 --> C04444</code><br />
+            <code>CustomerID of 55555 -> C55555</code><br />
+            <p>CustomerIDs have a max of 99999.</p>
+            <p>Honestly, you may want to just pass the data to your application and have that perform the parsing, and this might be more of an interview question, but then you don't get all this practice with the SQL Server functions.</p>
+            <h2>Possible Solutions</h2>
+            <p>I enjoyed looking at different ways to solve this with some colleagues. I am not vouching for performance, just different ways to do things. Most will require using the CAST function to change the data type, and I chose to name the column newid just to be standard (hence the AS).</p>
+            <h3>** CASE statement approach</h3>
+            <p>This solution starts by using the letter C, and then uses the LEN function combined with a CASE statement to fill in the gap. The solution struck me as a little inefficient, and wouldn't expand well if the ID could be larger (say, a BIGINT rather than INT).</p>
+            <pre><code>            SELECT 'C'+ CASE
+                WHEN LEN(customerid)=1
+                    THEN '0000'
+                WHEN LEN(customerid)=2
+                    THEN '000'
+                WHEN LEN(customerid)=3
+                    THEN '00'
+                WHEN LEN(customerid)=4
+                    THEN '0'
+                END + CAST(customerid as VARCHAR) AS newid
+            FROM customers;</code></pre>
+            <h3>** Addition and SUBSTRING approach</h3>
+            <p>Given the CustomerID is a number, one tricky way to manipulate it is to add 100,000 to it.</p>
+            <code>CustomerID of 1 --> 1000001</code><br />
+            <code>CustomerID of 22 -> 1000022</code><br />
+            <p>Then, you can convert to a character and save the last 5 characters. (A SUBSTRING of 2,6 will extract characters 2 through 6 of a string; the locations start at 1). This effectively discards the leading 1.</p>
+            <pre><code>            SELECT 'C'+ SUBSTRING(CAST(customerid+100000 AS CHAR(6)),2,6) AS newid
+            FROM customers;</code></pre>
+            <h3>** Using REPLICATE to pad zeros approach</h3>
+            <p>I like this one. REPLICATE is a T-SQL function to repeat a string a certain number of times. Here, we start with C, end with the CustomerID, and fill in the middle with the number of zeros necessary.</p>
+            <pre><code>            SELECT 'C'+REPLICATE('0',5-LEN(CAST(customerid AS VARCHAR))) + CAST(id AS VARCHAR)
+            FROM customers;</code></pre>
+            <h3>** FORMAT function approach</h3>
+            <p>At this point, it occurred to me that if we are just displaying it, maybe a FORMAT function could work, similar to the Excel TEXT function. The 0 placeholder is replaced if the digit at that decimal place is present, and the # indicates where the number should be placed. This could be a great solution if you don't need the data type changed and you just want to display the value.</p>
+            <pre><code>            SELECT FORMAT(customerid, 'C00000#')
+            FROM customers;</code></pre>
+        </article>
+    </main>
+</div>    
+</body>
+</html>
