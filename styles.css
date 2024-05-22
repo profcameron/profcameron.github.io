@@ -1,3 +1,7 @@
+body{
+    background-color: #4D565E;
+}
+
 .container{
     display: grid;
     grid-gap: 25px;
@@ -5,16 +9,15 @@
     "header-grid header-grid header-grid"
     ". nav-grid ."
     "main-grid main-grid main-grid";
-    grid-template-columns: 50px 1fr 50px;
+    grid-template-columns: .1fr .8fr .1fr;
     margin: 15px;
     background: #992600;
     font-family: "Roboto", sans-serif;    
 }
 
-
 header{
     grid-area: header-grid;
-    margin: 25px 25px 25px 25px;
+    margin: 25px 25px 0px 25px;
     background-color: #994d00;
     text-align: center;
     border-radius: 10px;
@@ -23,7 +26,7 @@ header{
 
 main{
     grid-area: main-grid;
-    margin: 25px 25px 25px 25px;
+    margin: 0px 25px 25px 25px;
     background-color: #DAE8F2;
     border-radius: 10px;
     font-size: 18px;
@@ -31,15 +34,26 @@ main{
 
 nav{
     grid-area: nav-grid;
-    height: 50px;
+    height: 75px;
     margin: 0px 5px 0px 5px;
     background-color: #DAE8F2;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     font-size: 1.2em;
     border-radius: 5px;
+}
+
+nav > a {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid black;
+}
+
+nav > a:last-child{
+    border-right: none;
+
 }
 
 article{
@@ -47,14 +61,44 @@ article{
     margin: 5px;
 }
 
-body{
-    background-color: #4D565E;
-}
-
 a{
     color: #000C66;
 }
 
+/* Used for code segments in various areas */
 pre{
     background-color: #FFFFFF;
+}
+
+
+@media (max-width: 800px){
+    /* Stacking the grid differently for small screens*/
+    .container{
+        grid-template-areas: 
+        "header-grid"
+        "nav-grid"
+        "main-grid";
+        grid-template-columns: 1fr;
+        grid-gap: 0px;
+    }
+
+    /* Smaller font size, vertical nav bar, removing margins on small screens */
+    nav{
+        font-size: 1em;
+        flex-direction: column;
+        height: 125px;
+        margin: 0px 5px 5px 5px;
+    }
+
+    /* Get rid of separator on small screens */
+    nav > a {
+        border-right: none;
+    }
+
+    /* Clean up margins and font size for small screens */
+    header, main{
+        margin: 10px 5px 10px 5px;
+        font-size: 1em;
+    }
+
 }
