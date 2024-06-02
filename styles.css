@@ -70,6 +70,10 @@ pre{
     background-color: #FFFFFF;
 }
 
+table, tr, td {
+    border: 1px solid black;
+  }        
+
 
 @media (max-width: 800px){
     /* Stacking the grid differently for small screens*/
