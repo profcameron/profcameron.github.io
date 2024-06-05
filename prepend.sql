@@ -1,7 +1,7 @@
-DROP TABLE customers;
+DROP TABLE IF EXISTS customers;
 
 -- Create a simple customers table
-CREATE TABLE customers
+CREATE TABLE students
 (
 	customerid INT PRIMARY KEY,
 	name CHAR(10)
