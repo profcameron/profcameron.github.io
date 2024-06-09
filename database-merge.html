@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL MERGE Command</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- favicon options for different browsers/devices -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!-- Adding a little spacing and separation between articles-->
+    <style>
+        h3 {
+          border-top: 1px solid black;
+          padding-top: 10px;
+        }        
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>SQL Merge Command</h2>
+        </header>
+        <nav id="nav-placeholder">
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        </nav>
+    <main>
+        <article>
+            <h1>SQL MERGE Command</h1>
+            <p>June 8, 2024</p>
+            <p>Most database classes teach you the main commands, SELECT-FROM-WHERE-GROUP BY-HAVING-ORDER BY, along with some basic data manipulation using INSERT, UPDATE, and DELETE.</p>
+            <p>MERGE is seem less commonly, but it's a fantatic resource in a very specific situation. MERGE is part of the ANSI SQL standard, so this will work across DBMS.</p>
+            <p>It is useful when you have one table and want to synchronize another table with it.</p>
+            <p>I have provided some sample code <a href="merge.sql">here</a>, which includes the creation script for the two tables shown below.</p>
+            <h2>Sample Use Case</h2>
+            <p>You have two tables that contain the same fields. The original table contains the following values. It is called <span class="fancy">student</span> in our database.</p>
+            <code>
+                <table>
+                    <tr><th>studentID</th><th>firstname</th><th>lastname</th><th>address</th><th>city</th><th>state</th><th>zip</th></tr>
+                    <tr><td>1</td><td>Lara</td><td>Garcia</td><td>850 Shady Beach Ave</td><td>Stockholm</td><td>NJ</td><td>07460</td></tr>
+                    <tr><td>2</td><td>Pola</td><td>Hayek</td><td>430 Brial Hwy</td><td>Paterson</td><td>NJ</td><td>07513</td></tr>
+                    <tr><td>3</td><td>Martin</td><td>Bryan</td><td>1199 Baum Ln</td><td>Hawthorne</td><td>NJ</td><td>07506</td></tr>
+                    <tr><td>4</td><td>Hiroshi</td><td>Tanaka</td><td>2152 Kylie Pl</td><td>Pompton Lakes</td><td>NJ</td><td>07442</td></tr>
+                    <tr><td>5</td><td>Yoshio</td><td>Ito</td><td>211 Cameron Rd</td><td>Ringwood</td><td>NJ</td><td>07456</td></tr>
+                </tr>
+                </table>
+            </code>
+            <p>There have been a few new records added (displayed with a <span class="newvalue">pink background</span>), and a few edited (displayed with an <span class="changed">aqua background</span>), and those changes need to be added to the table. This table is called <span class="fancy">imported</span> in our table. Perhaps there was some data that did not synchronize with our database.</p>
+            <code>
+                <table>
+                    <tr><th>studentID</th><th>firstname</th><th>lastname</th><th>address</th><th>city</th><th>state</th><th>zip</th></tr>
+                    <tr><td>1</td><td>Lara</td><td class="changed">Mueller</td><td>850 Shady Beach Ave</td><td>Stockholm</td><td>NJ</td><td>07460</td></tr>
+                    <tr><td>2</td><td>Pola</td><td>Hayek</td><td class="changed">745 Merle Blvd</td><td class="changed">Clifton</td><td>NJ</td><td class="changed">07014</td></tr>
+                    <tr><td class="newvalue">6</td class="newvalue"><td class="newvalue">Juvina</td class="newvalue"><td class="newvalue">Pawar</td class="newvalue"><td class="newvalue">153 Surrey Rd</td class="newvalue"><td class="newvalue">Hawthorne</td class="newvalue"><td class="newvalue">NJ</td class="newvalue"><td class="newvalue">07507</td class="newvalue"></tr>
+                    <tr><td class="newvalue">7</td class="newvalue"><td class="newvalue">Li</td class="newvalue"><td class="newvalue">Gao</td class="newvalue"><td class="newvalue">1303 Lakina Ln</td><td class="newvalue">Totowa</td class="newvalue"><td class="newvalue">NJ</td class="newvalue"><td class="newvalue">07511</td class="newvalue"></tr>
+                </table>
+            </code>
+            <p>Rather than writing code with potential logic errors, you can use the MERGE statement. In this case, the goal is to update students #1 and #2, and add #6 and #7. The MERGE statement will allow us to accomplish this.</p>
+            <p>The first step is to define the relationship between the tables. They do not have to have identical field names, but the data types must be the same. </p>
+            <p>This defines the way the tables are related. We now can define what to do in the three distinct (and optional) possibilities:</p>
+                <ul>
+                    <li>The same key is in both tables, but the values differ. In this case, overwrite <span class="fancy">student</span> table values with <span class="fancy">imported</span> table values.</li>
+                    <li>The key is found in the <span class="fancy">imported</span> table only. In this case, insert the values from <span class="fancy">imported</span> into <span class="fancy">student</span>.</li>
+                    <li>The key is found in <span class="fancy">student</span> table only. In this case, delete the value from <span class="fancy">student</span>.</li>
+                </ul>
+            <h3>Beginning of the MERGE command</h3>    
+            <pre><code>                MERGE student 
+                    USING imported
+                    ON imported.studentid = student.studentid</code></pre>
+            <h3>Values Match!</h3>    
+            <p>When data is matched, that means there is an update. We want to replace the existing values in<span class="fancy">student</span> with the values in <span class="fancy">imported</span>. This is basically an UPDATE query.</p>
+            <pre><code>                WHEN MATCHED THEN UPDATE 
+                SET
+                    studentID = imported.studentID,
+                    firstname = imported.firstname,
+                    lastname = imported.lastname, 
+                    address = imported.address, 
+                    city = imported.city,
+                    state = imported.state,
+                    zip = imported.zip</code></pre>
+            <h3>Values in <span class="fancy">imported</span> table only.</h3>    
+            <p>When there is a record in the <span class="fancy">imported</span> table that is not in the original <span class="fancy">student</span> table, this needs to be added. This is basically an INSERT query. Notice like a standalone INSERT query, we define which field names match up to which.</p>
+            <p>There is a new keyword here, TARGET. TARGET refers to the original table (in our case,<span class="fancy">student</span>).</p>
+            <pre><code>                WHEN NOT MATCHED BY TARGET THEN
+                INSERT (studentID, firstname, lastname, address, city, state, zip) VALUES 
+                (imported.studentID, imported.firstname, imported.lastname, imported.address, imported.city, imported.state, imported.zip)</code></pre>
+            <h3>Values in <span class="fancy">student</span> table only.</h3>    
+            <p>I would NOT run this in this example (it would delete students 3, 4, and 5), but you can also use a DELETE query if a record is not in the new table (in our case, <span class="fancy">imported</span>), but not in the original (student). This would imply a record has been removed in the new data set.</p>
+            <p>There is another new keyword here, SOURCE. SOURCE refers to the new table (in our case, <span class="fancy">imported</span>).</p>
+            <pre><code>                WHEN NOT MATCHED BY SOURCE THEN
+                DELETE </code></pre>
+            <p>If we ran the above code, commenting out the DELETE, here are the results:</p>
+            <code>
+                <table>
+                    <tr><th>studentID</th><th>firstname</th><th>lastname</th><th>address</th><th>city</th><th>state</th><th>zip</th></tr>
+                    <tr><td>1</td><td>Lara</td><td class="changed">Mueller</td><td>850 Shady Beach Ave</td><td>Stockholm</td><td>NJ</td><td>07460</td></tr>
+                    <tr><td>2</td><td>Pola</td><td>Hayek</td><td class="changed">745 Merle Blvd</td><td class="changed">Clifton</td><td>NJ</td><td class="changed">07014</td></tr>
+                    <tr><td>3</td><td>Martin</td><td>Bryan</td><td>1199 Baum Ln</td><td>Hawthorne</td><td>NJ</td><td>07506</td></tr>
+                    <tr><td>4</td><td>Hiroshi</td><td>Tanaka</td><td>2152 Kylie Pl</td><td>Pompton Lakes</td><td>NJ</td><td>07442</td></tr>
+                    <tr><td>5</td><td>Yoshio</td><td>Ito</td><td>211 Cameron Rd</td><td>Ringwood</td><td>NJ</td><td>07456</td></tr>
+                    <tr><td class="newvalue">6</td class="newvalue"><td class="newvalue">Juvina</td class="newvalue"><td class="newvalue">Pawar</td class="newvalue"><td class="newvalue">153 Surrey Rd</td class="newvalue"><td class="newvalue">Hawthorne</td class="newvalue"><td class="newvalue">NJ</td class="newvalue"><td class="newvalue">07507</td class="newvalue"></tr>
+                    <tr><td class="newvalue">7</td class="newvalue"><td class="newvalue">Li</td class="newvalue"><td class="newvalue">Gao</td class="newvalue"><td class="newvalue">1303 Lakina Ln</td><td class="newvalue">Totowa</td class="newvalue"><td class="newvalue">NJ</td class="newvalue"><td class="newvalue">07511</td class="newvalue"></tr>
+                </table>
+            </code>
+            <h3>Conclusion</h3>
+            <p>Definitely not something you will use every day, but when you need it, MERGE is a very powerful tool to have in your SQL toolbox.</p>
+        </article>
+    </main>
+</div>    
+</body>
+</html>
