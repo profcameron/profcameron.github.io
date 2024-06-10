@@ -50,14 +50,15 @@ MERGE student
     ON imported.studentid = student.studentid
 
     -- For updated records (found in both tables), perform an UPDATE query
-    WHEN MATCHED THEN UPDATE SET
-    studentID = imported.studentID,
-    firstname = imported.firstname,
-    lastname = imported.lastname, 
-    address = imported.address, 
-    city = imported.city,
-    state = imported.state,
-    zip = imported.zip
+    WHEN MATCHED THEN UPDATE 
+    SET
+        studentID = imported.studentID,
+        firstname = imported.firstname,
+        lastname = imported.lastname, 
+        address = imported.address, 
+        city = imported.city,
+        state = imported.state,
+        zip = imported.zip
 
    -- For records found in the imported table, but not student, do an INSERT
    -- "TARGET" refers to the main table; in our case, student

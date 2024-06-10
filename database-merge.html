@@ -41,8 +41,22 @@
             <p>June 8, 2024</p>
             <p>Most database classes teach you the main commands, SELECT-FROM-WHERE-GROUP BY-HAVING-ORDER BY, along with some basic data manipulation using INSERT, UPDATE, and DELETE.</p>
             <p>MERGE is seem less commonly, but it's a fantatic resource in a very specific situation. MERGE is part of the ANSI SQL standard, so this will work across DBMS.</p>
-            <p>It is useful when you have one table and want to synchronize another table with it.</p>
+            <p>It is useful when you have one table and want to synchronize another table with it. Performance tends to be pretty good and should scale well. Combining into a single statement also simplifies the number of queries you need to track as an administrator.</p>
             <p>I have provided some sample code <a href="merge.sql">here</a>, which includes the creation script for the two tables shown below.</p>
+            <h2>MERGE syntax</h2>
+            <p>I have an example below which will be more detailed, but this is the general syntax. You do not need to do all three of these.</p>
+            <pre><code>           MERGE table1 
+                USING table2
+                ON table1.key = table2.key
+
+                WHEN MATCHED THEN UPDATE -- There are matching values in both tables; save the values from table2 
+                    SET -- set fields here, so for example firstname = table2.firstname
+
+                WHEN NOT MATCHED BY TARGET THEN -- this is a new record
+                    INSERT -- list of fields to insert would follow, like an INSERT query
+
+                WHEN NOT MATCHED BY SOURCE THEN -- this record was deleted
+                    DELETE -- Nothing else needs to go here; just the word DELETE            </code></pre>
             <h2>Sample Use Case</h2>
             <p>You have two tables that contain the same fields. The original table contains the following values. It is called <span class="fancy">student</span> in our database.</p>
             <code>
@@ -79,7 +93,7 @@
                     USING imported
                     ON imported.studentid = student.studentid</code></pre>
             <h3>Values Match!</h3>    
-            <p>When data is matched, that means there is an update. We want to replace the existing values in<span class="fancy">student</span> with the values in <span class="fancy">imported</span>. This is basically an UPDATE query.</p>
+            <p>When data is matched, that means there is an update. We want to replace the existing values in <span class="fancy">student</span> with the values in <span class="fancy">imported</span>. This is basically an UPDATE query.</p>
             <pre><code>                WHEN MATCHED THEN UPDATE 
                 SET
                     studentID = imported.studentID,
