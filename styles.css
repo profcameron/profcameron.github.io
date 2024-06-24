@@ -87,6 +87,11 @@ table, tr, td, th{
     background-color: #FFFFFF;
 }
 
+.bold{
+    font-weight: bold;
+}
+
+
 @media (max-width: 800px){
     /* Stacking the grid differently for small screens*/
     .container{

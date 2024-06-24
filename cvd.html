@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ddressing Color Vision Deficiency in Digital Content</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- favicon options for different browsers/devices -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!-- Adding a little spacing and separation between articles-->
+    <style>
+        h3 {
+          border-top: 1px solid black;
+          padding-top: 10px;
+        }        
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Addressing Color Vision Deficiency in Digital Content</h2>
+        </header>
+        <nav id="nav-placeholder">
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        </nav>
+    <main>
+        <article>
+            <h2>Eric Cameron (ericcameron.dev), June 24, 2024</h2>
+            <p>Color vision deficiency (CVD) - or what we used to call color blindness - is an important consideration in design and is often overlooked.</p> 
+            <p>I first encountered the challenges of color vision deficiency (CVD) in elementary school when I took the Ishihara tests (those colorful numbers inside colorful circles). I passed, but a friend struggled with red-green colorblindness. I became aware of the real-world impact at a young age. Later, while teaching Microsoft Word in 2001, I realized the significance of this issue when a student confided they couldn't distinguish between the green grammar check and the red spell check underlines (as shown below).</p>
+            <img src="CVD-Word.png" alt="Red/Green CVD in the old Microsoft Word" />
+            
+            <p>By the way, Microsoft didn't fix that until Word 2016, when they changed grammar error underlining to blue.</p>
+            
+            Some CVD facts, per <a href="https://enchroma.com/blogs/beyond-color/interesting-facts-about-color-blindness" target="_blank">EnChroma</a>:
+            <ul>
+                <li><span class="bold">Rare in Women: </span>1/200</li>
+                <li><span class="bold">Common in Men: </span>1/12</li>
+                <li><span class="bold">Most Common Type: </span>Red/Green CVD</li>
+            </ul>
+            <p>It is important to consider when designing for web, or using screenshots or video, especially so if your audience demographic trends towards males.</p>
+
+            <h2>Practical Solutions</h2>
+            <ul>
+                <li class="bold">Use High Contrast Themes</li>Use Windows Contrast Themes, or similar options in your OS of choice, for screenshots and video.
+                <li class="bold">Check Images for CVD Compatibility</li>Use a free online tool such as <a href="https://www.color-blindness.com/coblis-color-blindness-simulator" target="_blank">COBLIS (color blindness simulator)</a> to check images. 
+                <li class="bold">Choose Accessible Color Schemes</li>The <a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM contrast checker</a> will check if your colors pass the WCAG (Web Content Accessibility Guidelines) standards.
+            </ul>
+            <p>Considering users with CVD and incorporating these suggestions into your site will create more accessible content.</p>
+        </article>
+    </main>
+</div>    
+</body>
+</html>
