@@ -1,0 +1,13 @@
+{
+    "files.watcherExclude": {
+        "**/.git/objects/**": false,
+        "**/.git/subtree-cache/**": false,
+        "**/.hg/store/**": false,
+        "**/node_modules/*/**": false
+    },
+    "explorer.excludeGitIgnore": false,
+    "cSpell.useGitignore": false,
+    "files.exclude": {
+        "**/.git": false
+    }
+}
