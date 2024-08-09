@@ -1,2 +1,5 @@
-# portfolio
-Welcome to my web portfolio! I am going to highlight some of my various strengths here. Thanks for visiting!
+# www.ericcameron.dev source code
+
+Welcome to my web portfolio! This is the source for my site.
+
+I did all the coding by hand because I do love my coding!
