@@ -126,6 +126,24 @@ table, tr, td, th{
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  padding: 0.6rem 1.4rem;
+  background-color: #0058a3;        /* Navy blue */
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #003f7d;        /* Darker blue on hover */
+  transform: translateY(-2px);      /* Slight lift effect */
+}
+
 
 @media (max-width: 800px){
     /* Stacking the grid differently for small screens*/
