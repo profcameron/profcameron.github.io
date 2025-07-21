@@ -1,5 +1,6 @@
 body{
     background-color: #4D565E;
+    font-family: "Roboto", sans-serif;    
 }
 
 .container{
@@ -12,7 +13,6 @@ body{
     grid-template-columns: .1fr .8fr .1fr;
     margin: 15px;
     background: #992600;
-    font-family: "Roboto", sans-serif;    
 }
 
 header{
@@ -89,6 +89,41 @@ table, tr, td, th{
 
 .bold{
     font-weight: bold;
+}
+
+.contact-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 3rem 1rem;
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.hero-text {
+  flex: 1 1 400px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #003366;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.hero-image img {
+  width: 240px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 
